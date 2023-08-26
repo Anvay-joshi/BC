@@ -1,0 +1,105 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/anvay/first-dir/c_programs-/BC/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+ACCURACY	numbers.h	/^#define ACCURACY /;"	d
+BC	README.md	/^# BC$/;"	c
+DOUBLY_LL_H_	doubly_LL.h	/^#define DOUBLY_LL_H_$/;"	d
+DTYPE	singly_LL.h	/^#define DTYPE /;"	d
+DTYPE1	singly_LL_numbers.h	/^#define DTYPE1 /;"	d
+MAX_EXPRESSION_LENGTH	main.c	/^#define MAX_EXPRESSION_LENGTH /;"	d	file:
+NUMBERS_H_	numbers.h	/^#define NUMBERS_H_$/;"	d
+OPERATIONS_H_	operations.h	/^#define OPERATIONS_H_$/;"	d
+SINGLY_LL_H_	singly_LL.h	/^#define SINGLY_LL_H_$/;"	d
+SINGLY_LL_H_NUMBERS_	singly_LL_numbers.h	/^#define SINGLY_LL_H_NUMBERS_$/;"	d
+SLL_node	singly_LL.h	/^typedef struct SLL_node{$/;"	s
+SLL_node	singly_LL.h	/^}SLL_node;$/;"	t	typeref:struct:SLL_node
+SLL_number_node	singly_LL_numbers.h	/^typedef struct SLL_number_node{$/;"	s
+SLL_number_node	singly_LL_numbers.h	/^}SLL_number_node;$/;"	t	typeref:struct:SLL_number_node
+STACK_H_	stack.h	/^#define STACK_H_$/;"	d
+STACK_H_NUMBERS_	stack_numbers.h	/^#define STACK_H_NUMBERS_$/;"	d
+add	operations.c	/^number add(number n1, number n2){$/;"	f	typeref:typename:number
+add_mag	operations.c	/^number add_mag(number n1, number n2){$/;"	f	typeref:typename:number
+applyOperator	main.c	/^number applyOperator(number a, number b, char operator) {$/;"	f	typeref:typename:number
+bottom	stack.h	/^    SLL_node* bottom;$/;"	m	struct:stack	typeref:typename:SLL_node *
+bottom	stack_numbers.h	/^    SLL_number_node* bottom;$/;"	m	struct:stack_number	typeref:typename:SLL_number_node *
+createNode_SLL	singly_LL.c	/^SLL_node* createNode_SLL(DTYPE num){$/;"	f	typeref:typename:SLL_node *
+createNode_SLL_number	singly_LL_numbers.c	/^SLL_number_node* createNode_SLL_number(DTYPE1 num){$/;"	f	typeref:typename:SLL_number_node *
+data	doubly_LL.h	/^    char data;$/;"	m	struct:node	typeref:typename:char
+data	singly_LL.h	/^    DTYPE data;$/;"	m	struct:SLL_node	typeref:typename:DTYPE
+data	singly_LL_numbers.h	/^    DTYPE1 data;$/;"	m	struct:SLL_number_node	typeref:typename:DTYPE1
+decimal_pos	numbers.h	/^    int decimal_pos;$/;"	m	struct:number	typeref:typename:int
+deleteAtPosition_SLL	singly_LL.c	/^void deleteAtPosition_SLL(SLL_node** head, int pos){$/;"	f	typeref:typename:void
+deleteAtPosition_SLL_number	singly_LL_numbers.c	/^void deleteAtPosition_SLL_number(SLL_number_node** head, int pos){$/;"	f	typeref:typename:void
+deleteHead_SLL	singly_LL.c	/^void deleteHead_SLL(SLL_node** head){$/;"	f	typeref:typename:void
+deleteHead_SLL_number	singly_LL_numbers.c	/^void deleteHead_SLL_number(SLL_number_node** head){$/;"	f	typeref:typename:void
+deleteTail_SLL	singly_LL.c	/^void deleteTail_SLL(SLL_node** head){$/;"	f	typeref:typename:void
+deleteTail_SLL_number	singly_LL_numbers.c	/^void deleteTail_SLL_number(SLL_number_node** head){$/;"	f	typeref:typename:void
+displayList	doubly_LL.c	/^void displayList(node* head){$/;"	f	typeref:typename:void
+displayListReverse	doubly_LL.c	/^void displayListReverse(node* tail){$/;"	f	typeref:typename:void
+displayNumber	numbers.c	/^void displayNumber(number n){$/;"	f	typeref:typename:void
+displayNumberReverse	numbers.c	/^void displayNumberReverse(number n){$/;"	f	typeref:typename:void
+evaluateExpression	main.c	/^number evaluateExpression(char *expression) {$/;"	f	typeref:typename:number
+head	numbers.h	/^    node* head;$/;"	m	struct:number	typeref:typename:node *
+height	stack.h	/^    int height;$/;"	m	struct:stack	typeref:typename:int
+height	stack_numbers.h	/^    int height;$/;"	m	struct:stack_number	typeref:typename:int
+init_number	numbers.c	/^number init_number(char digit){$/;"	f	typeref:typename:number
+init_number_ptr	numbers.c	/^number* init_number_ptr(char digit){$/;"	f	typeref:typename:number *
+init_stack	stack.c	/^stack init_stack(DTYPE num){$/;"	f	typeref:typename:stack
+init_stack_number	stack_numbers.c	/^stack_number init_stack_number(DTYPE1 num){$/;"	f	typeref:typename:stack_number
+insertAtEnd	doubly_LL.c	/^void insertAtEnd(node** tail, char n){$/;"	f	typeref:typename:void
+insertAtHead	doubly_LL.c	/^void insertAtHead(node** head, char n){$/;"	f	typeref:typename:void
+insertAtHead_SLL	singly_LL.c	/^void insertAtHead_SLL(SLL_node** head, DTYPE num){$/;"	f	typeref:typename:void
+insertAtHead_SLL_number	singly_LL_numbers.c	/^void insertAtHead_SLL_number(SLL_number_node** head, DTYPE1 num){$/;"	f	typeref:typename:void
+insertAtPosition_SLL	singly_LL.c	/^void insertAtPosition_SLL(SLL_node** head, DTYPE num, int pos){$/;"	f	typeref:typename:void
+insertAtPosition_SLL_number	singly_LL_numbers.c	/^void insertAtPosition_SLL_number(SLL_number_node** head, DTYPE1 num, int pos){$/;"	f	typeref:typename:void
+insertAtTail_SLL	singly_LL.c	/^void insertAtTail_SLL(SLL_node** head, DTYPE num){$/;"	f	typeref:typename:void
+insertAtTail_SLL_number	singly_LL_numbers.c	/^void insertAtTail_SLL_number(SLL_number_node** head, DTYPE1 num){$/;"	f	typeref:typename:void
+insertDigitAtEnd	numbers.c	/^void insertDigitAtEnd(number* n, char digit){$/;"	f	typeref:typename:void
+insertDigitAtHead	numbers.c	/^void insertDigitAtHead(number* n, char digit){$/;"	f	typeref:typename:void
+isNumber	main.c	/^int isNumber(char c){$/;"	f	typeref:typename:int
+isOperator	main.c	/^int isOperator(char c) {$/;"	f	typeref:typename:int
+isPoint	main.c	/^int isPoint(char c){$/;"	f	typeref:typename:int
+isempty_stack	stack.c	/^bool isempty_stack(stack S){$/;"	f	typeref:typename:bool
+isempty_stack_number	stack_numbers.c	/^bool isempty_stack_number(stack_number S){$/;"	f	typeref:typename:bool
+main	Makefile	/^main: main.o double_LL.o numbers.o operations.o$/;"	t
+main	main.c	/^    int main(int argc, char* argv[]){$/;"	f	typeref:typename:int
+mul	operations.c	/^number mul(number n1, number n2){$/;"	f	typeref:typename:number
+mul_by_constant	operations.c	/^number mul_by_constant(number n1, char a){$/;"	f	typeref:typename:number
+mul_mag	operations.c	/^number mul_mag(number n1, number n2){$/;"	f	typeref:typename:number
+next	doubly_LL.h	/^    struct node* next;$/;"	m	struct:node	typeref:struct:node *
+next	singly_LL.h	/^    struct SLL_node* next;$/;"	m	struct:SLL_node	typeref:struct:SLL_node *
+next	singly_LL_numbers.h	/^    struct SLL_number_node* next;$/;"	m	struct:SLL_number_node	typeref:struct:SLL_number_node *
+node	doubly_LL.h	/^typedef struct node{$/;"	s
+node	doubly_LL.h	/^}node;$/;"	t	typeref:struct:node
+number	numbers.h	/^typedef struct number{$/;"	s
+number	numbers.h	/^}number;$/;"	t	typeref:struct:number
+numberComparison	operations.c	/^char numberComparison(number n1, number n2){$/;"	f	typeref:typename:char
+pop	stack.c	/^void pop(stack* S){$/;"	f	typeref:typename:void
+pop_number	stack_numbers.c	/^void pop_number(stack_number* S){$/;"	f	typeref:typename:void
+precedence	main.c	/^int precedence(char operator) {$/;"	f	typeref:typename:int
+prev	doubly_LL.h	/^    struct node* prev;$/;"	m	struct:node	typeref:struct:node *
+print_stack	stack.c	/^void print_stack(stack S){$/;"	f	typeref:typename:void
+print_stack_number	stack_numbers.c	/^void print_stack_number(stack_number S){$/;"	f	typeref:typename:void
+push	stack.c	/^void push(stack* S, DTYPE item){$/;"	f	typeref:typename:void
+push_number	stack_numbers.c	/^void push_number(stack_number* S, DTYPE1 item){$/;"	f	typeref:typename:void
+sign	numbers.h	/^    bool sign;$/;"	m	struct:number	typeref:typename:bool
+size	numbers.h	/^    int size;$/;"	m	struct:number	typeref:typename:int
+stack	stack.h	/^typedef struct stack{$/;"	s
+stack	stack.h	/^}stack;$/;"	t	typeref:struct:stack
+stack_number	stack_numbers.h	/^typedef struct stack_number{$/;"	s
+stack_number	stack_numbers.h	/^}stack_number;$/;"	t	typeref:struct:stack_number
+stack_number_top	stack_numbers.c	/^DTYPE1 stack_number_top(stack_number S){$/;"	f	typeref:typename:DTYPE1
+stack_top	stack.c	/^DTYPE stack_top(stack S){$/;"	f	typeref:typename:DTYPE
+sub	operations.c	/^number sub(number n1, number n2){$/;"	f	typeref:typename:number
+sub_mag	operations.c	/^number sub_mag(number n1, number n2){$/;"	f	typeref:typename:number
+tail	numbers.h	/^    node* tail;$/;"	m	struct:number	typeref:typename:node *
+top	stack.h	/^    SLL_node* top;$/;"	m	struct:stack	typeref:typename:SLL_node *
+top	stack_numbers.h	/^    SLL_number_node* top;$/;"	m	struct:stack_number	typeref:typename:SLL_number_node *

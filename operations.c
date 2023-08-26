@@ -5,37 +5,37 @@
 #include "doubly_LL.h"
 #include "operations.h"
 
-number div_mag(number n1, number n2){
-    if(n2.size == 1 && n2.head->data == 0){
-        printf("division by zero error\n");
-        return  n2;
-    }     
-
-    number quotient = init_number(0);
-    char factor = 0;
-    number rem = n1;
-    int order_of_mag = 0;
-    while(numberComparison(rem, n2) == 1){
-        number intermediate = init_number(0);
-        if(n2.head->data > n1.head->data){
-            order_of_mag = n1.size - n2.size - 1; 
-        }
-        else{
-            order_of_mag = n1.size - n2.size;
-        }
-        while(order_of_mag --){
-            insertDigitAtEnd(&intermediate, 0);
-        }
-        while(numberComparison(mul_by_constant(quotient, factor + 1),rem) != 1){
-            factor++;
-        }
-        mul_by_constant(intermediate, factor);
-        add_mag(quotient, intermediate);
-        rem = sub_mag(rem,mul_mag(n2,intermediate));
-    }
-    return quotient;
-
-}
+//number div_mag(number n1, number n2){
+//    if(n2.size == 1 && n2.head->data == 0){
+//        printf("division by zero error\n");
+//        return  n2;
+//    }     
+//
+//    number quotient = init_number(0);
+//    char factor = 0;
+//    number rem = n1;
+//    int order_of_mag = 0;
+//    while(numberComparison(rem, n2) == 1){
+//        number intermediate = init_number(0);
+//        if(n2.head->data > n1.head->data){
+//            order_of_mag = n1.size - n2.size - 1; 
+//        }
+//        else{
+//            order_of_mag = n1.size - n2.size;
+//        }
+//        while(order_of_mag --){
+//            insertDigitAtEnd(&intermediate, 0);
+//        }
+//        while(numberComparison(mul_by_constant(quotient, factor + 1),rem) != 1){
+//            factor++;
+//        }
+//        mul_by_constant(intermediate, factor);
+//        add_mag(quotient, intermediate);
+//        rem = sub_mag(rem,mul_mag(n2,intermediate));
+//    }
+//    return quotient;
+//
+//}
 
 number mul_by_constant(number n1, char a){
     number n2 = init_number(0);
@@ -75,6 +75,8 @@ number mul(number n1, number n2){
 }
 
 number mul_mag(number n1, number n2){
+    //printf("decimal pos of n1: %d\n", n1.decimal_pos);
+    //printf("decimal pos of n2: %d\n", n2.decimal_pos);
     number n3 = init_number(0);
     number n4 = init_number(0);
     node* temp2 = n2.tail;
@@ -98,8 +100,11 @@ number mul_mag(number n1, number n2){
         }
         while(temp1 != NULL){
             prod = num * temp1->data + carry; 
+            //printf("\n\n ---- mul ---- \n");
+            //printf("%d * %d + %d = ",num, temp1->data, carry);
             carry = prod / 10; 
             prod = prod % 10;
+            //printf("%d\ncarry = %d ", prod, carry);
 
             if (temp4 == NULL){
                 insertDigitAtHead(&n4, prod);
@@ -113,12 +118,18 @@ number mul_mag(number n1, number n2){
         }
         if(carry != 0){
             insertDigitAtHead(&n4, carry);
+            //temp4 = temp4->prev;
         }
+       // printf("\nn4 is:");
+       // displayNumber(n4);
         n3 = add_mag(n3, n4);
+        //printf("\nn3 is:");
+        //displayNumber(n3);
         temp2_pos ++;
         temp2 = temp2->prev;
         
     }
+    n3.decimal_pos = n1.decimal_pos + n2.decimal_pos;
     return n3;
 }
 
@@ -152,9 +163,6 @@ number add_mag(number n1, number n2){
             temp1 = temp1->prev;
         }
 
-        else if(temp1 == NULL && temp2 == NULL && carry != 0){
-            insertDigitAtHead(&n3, carry);
-        }
 
         else{
             sum = (temp1->data + temp2->data + carry);
@@ -166,6 +174,15 @@ number add_mag(number n1, number n2){
 
         }
     }
+
+    if( carry != 0){
+        insertDigitAtHead(&n3, carry);
+    }
+//    printf("sum is :\n");
+//    displayNumber(n1);
+//    displayNumber(n2);
+//    printf(" = \n");
+//    displayNumber(n3);
     return n3;
 }
 

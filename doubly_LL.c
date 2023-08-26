@@ -3,6 +3,13 @@
 #include "doubly_LL.h"
 
 void insertAtEnd(node** tail, char n){
+    if((*tail) == NULL){
+        (*tail) = (node*) malloc(sizeof(node));
+        (*tail)->next = NULL;
+        (*tail)->prev = NULL;
+        (*tail)->data = n;
+        return;
+    }
     node* temp = (node*) malloc(sizeof(node));
     temp->data = n;
     (*tail)->next = temp;
