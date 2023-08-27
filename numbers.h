@@ -21,7 +21,7 @@ number init_number(char digit);
 number* init_number_ptr(char digit);
 void insertDigitAtEnd(number*, char digit);
 void insertDigitAtHead(number*, char digit);
-void displayNumber(number );
+void displayNumber(number*);
 void displayNumberReverse(number);
 
 #endif

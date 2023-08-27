@@ -30,7 +30,7 @@ int precedence(char operator) {
     return 0;
 }
 
-number applyOperator(number a, number b, char operator) {
+number* applyOperator(number* a, number* b, char operator) {
     switch (operator) {
         case '+': 
             //printf("adding ");
@@ -54,10 +54,10 @@ number applyOperator(number a, number b, char operator) {
             return mul(a, b);
             //case '/': return a / b;
     }
-    return init_number(0);
+    return init_number_ptr(0);
 }
 
-number evaluateExpression(char *expression) {
+number* evaluateExpression(char *expression) {
     number nul = init_number(-1);
     char nul_char = '0';
     stack opStack;
@@ -86,7 +86,7 @@ number evaluateExpression(char *expression) {
                 else if(isPoint(expression[i]) && deci_flag == 1){
                     temp = init_number_ptr(0);
                     printf("\n\nmultiple Decinal point exception!!\n\n");
-                    return *temp;
+                    return temp;
                 }
                 else if(isdigit(expression[i])){
                     if(deci_flag == 1){
@@ -136,8 +136,8 @@ number evaluateExpression(char *expression) {
         //print_stack_number(numStack);
                 char op = *stack_top(opStack);
                 pop(&opStack);
-                number result = applyOperator(a, b, op);
-                push_number(&numStack, &result);
+                number* result = applyOperator(&a, &b, op);
+                push_number(&numStack, result);
                 
             }
             pop(&opStack);
@@ -147,7 +147,7 @@ number evaluateExpression(char *expression) {
             //printf("operator %c occured\n", expression[i]);
             while ((*stack_top(opStack) != -1) && precedence(*stack_top(opStack)) >= precedence(expression[i])) {
                 number b = *stack_number_top(numStack);
-                printf("\n\nnumber b is:\n");
+                //printf("\n\nnumber b is:\n");
                 //displayNumber(b);
                 //pop_number(&numStack);
                 number a = *stack_number_top(numStack);
@@ -156,8 +156,8 @@ number evaluateExpression(char *expression) {
                 pop_number(&numStack);
                 char op = *stack_top(opStack);
                 pop(&opStack);
-                number result = applyOperator(a, b, op);
-                push_number(&numStack, &result);
+                number* result = applyOperator(&a, &b, op);
+                push_number(&numStack, result);
             }
             push(&opStack, &(expression[i]));
         }
@@ -170,11 +170,11 @@ number evaluateExpression(char *expression) {
         pop_number(&numStack);
         char op = *stack_top(opStack);
         pop(&opStack);
-        number result = applyOperator(a, b, op);
-        push_number(&numStack, &result);
+        number* result = applyOperator(&a, &b, op);
+        push_number(&numStack, result);
     }
 
-    return *stack_number_top(numStack);
+    return stack_number_top(numStack);
     }
 
     int main(int argc, char* argv[]){
@@ -194,7 +194,7 @@ number evaluateExpression(char *expression) {
                 strncpy(expression, input, MAX_EXPRESSION_LENGTH);
             }
 
-            number result = evaluateExpression(expression);
+            number* result = evaluateExpression(expression);
             printf("result\n");
             //printf("%d\n", result.decimal_pos);
             displayNumber(result);

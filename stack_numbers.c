@@ -61,7 +61,7 @@ void print_stack_number(stack_number S){
     SLL_number_node* temp = S.bottom;
     while(temp!=NULL){
         //printf("%d (%c)\t",(temp->data)->data,(temp->data)->data);
-        displayNumber(*(temp->data));
+        displayNumber((temp->data));
         temp = temp->next;
     }
     printf("\n");

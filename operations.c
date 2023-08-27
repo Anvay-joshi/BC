@@ -37,54 +37,54 @@
 //
 //}
 
-number mul_by_constant(number n1, char a){
-    number n2 = init_number(0);
-    n2.size = 0;
-    node* temp = n1.tail;
-    int carry = 0;
-    int prod = 0;
-    while(temp != NULL){
-        prod = a * temp->data + carry;
-        carry = prod / 10;
-        prod = prod % 10;
+//number* mul_by_constant(number n1, char a){
+//    number n2 = init_number(0);
+//    n2.size = 0;
+//    node* temp = n1.tail;
+//    int carry = 0;
+//    int prod = 0;
+//    while(temp != NULL){
+//        prod = a * temp->data + carry;
+//        carry = prod / 10;
+//        prod = prod % 10;
+//
+//        if(n2.size == 0){
+//            n2.head->data = prod;
+//            n2.size = 1;
+//        }
+//        else
+//            insertDigitAtHead(&n2, prod); 
+//        temp = temp->prev;
+//    }  
+//    if(carry != 0){
+//        insertDigitAtHead(&n2, prod);
+//    }
+//    return n2;
+//}
 
-        if(n2.size == 0){
-            n2.head->data = prod;
-            n2.size = 1;
-        }
-        else
-            insertDigitAtHead(&n2, prod); 
-        temp = temp->prev;
-    }  
-    if(carry != 0){
-        insertDigitAtHead(&n2, prod);
-    }
-    return n2;
-}
-
-number mul(number n1, number n2){
-    if(n1.sign == n2.sign)
+number* mul(number* n1, number* n2){
+    if(n1->sign == n2->sign)
         return mul_mag(n1,n2);
      
     else{
-        number n3 = mul_mag(n1,n2);
-        n3.sign = false;
+        number* n3 = mul_mag(n1,n2);
+        n3->sign = false;
         return n3;
     }
 
 }
 
-number mul_mag(number n1, number n2){
-    //printf("decimal pos of n1: %d\n", n1.decimal_pos);
-    //printf("decimal pos of n2: %d\n", n2.decimal_pos);
-    number n3 = init_number(0);
+number* mul_mag(number* n1, number* n2){
+    printf("decimal pos of n1: %d\n", n1->decimal_pos);
+    printf("decimal pos of n2: %d\n", n2->decimal_pos);
+    number* n3 = init_number_ptr(0);
     number n4 = init_number(0);
-    node* temp2 = n2.tail;
+    node* temp2 = n2->tail;
     int temp2_pos = 0;
     while((temp2!= NULL)){
 
         char num = temp2->data;   
-        node* temp1 = n1.tail;
+        node* temp1 = n1->tail;
         node* temp4 = n4.tail;
         int prod, carry = 0;
         for(int i = 1; i <= temp2_pos; i++){
@@ -122,36 +122,42 @@ number mul_mag(number n1, number n2){
         }
        // printf("\nn4 is:");
        // displayNumber(n4);
-        n3 = add_mag(n3, n4);
+        n3 = add_mag(n3, &n4);
         //printf("\nn3 is:");
         //displayNumber(n3);
         temp2_pos ++;
         temp2 = temp2->prev;
         
     }
-    n3.decimal_pos = n1.decimal_pos + n2.decimal_pos;
+    n3->decimal_pos = n1->decimal_pos + n2->decimal_pos;
     return n3;
 }
 
 
-number add_mag(number n1, number n2){
+number* add_mag(number* n1, number* n2){
+    printf("decimal pos of n1: %d\n", n1->decimal_pos);
+    printf("decimal pos of n2: %d\n", n2->decimal_pos);
+    printf("\nn1 is: ");
+    displayNumber(n1);
+    printf("\nn2 is: ");
+    displayNumber(n2);
     char sum = 0;
     char carry = 0;
 
-    sum = (n1.tail)->data + (n2.tail)->data;
+    sum = (n1->tail)->data + (n2->tail)->data;
     carry = sum/10;
     sum = sum % 10;
 
-    number n3 = init_number(sum);
-    node* temp1 = (n1.tail)->prev;
-    node* temp2 = (n2.tail)->prev;
+    number* n3 = init_number_ptr(sum);
+    node* temp1 = (n1->tail)->prev;
+    node* temp2 = (n2->tail)->prev;
     
     while(temp1 != NULL || temp2 != NULL){
         if(temp1 == NULL && temp2 != NULL){
             sum = (temp2->data + carry);
             carry = sum / 10;
             sum = sum % 10;
-            insertDigitAtHead(&n3, sum);
+            insertDigitAtHead(n3, sum);
             temp2 = temp2->prev;
         }
 
@@ -159,7 +165,7 @@ number add_mag(number n1, number n2){
             sum = (temp1->data + carry);
             carry = sum / 10;
             sum = sum % 10;
-            insertDigitAtHead(&n3, sum);
+            insertDigitAtHead(n3, sum);
             temp1 = temp1->prev;
         }
 
@@ -168,7 +174,7 @@ number add_mag(number n1, number n2){
             sum = (temp1->data + temp2->data + carry);
             carry = sum / 10;
             sum = sum % 10;
-            insertDigitAtHead(&n3, sum);
+            insertDigitAtHead(n3, sum);
             temp1 = temp1->prev;
             temp2 = temp2->prev;
 
@@ -176,139 +182,174 @@ number add_mag(number n1, number n2){
     }
 
     if( carry != 0){
-        insertDigitAtHead(&n3, carry);
+        insertDigitAtHead(n3, carry);
     }
 //    printf("sum is :\n");
 //    displayNumber(n1);
 //    displayNumber(n2);
 //    printf(" = \n");
 //    displayNumber(n3);
+    n3->decimal_pos = n1->decimal_pos;
     return n3;
 }
 
-number add(number n1, number n2){
-    if(n1.sign == true && n2.sign == true){
+number* add(number* n1, number* n2){
+
+    if(n1->decimal_pos > n2->decimal_pos){
+        int diff = n1->decimal_pos - n2->decimal_pos;
+        for(int i = 0; i < diff; i++){
+            insertDigitAtEnd(n2, 0);
+            n2->decimal_pos ++;
+        }
+    }
+
+    else if(n1->decimal_pos < n2->decimal_pos){
+        int diff = n2->decimal_pos - n1->decimal_pos;
+        for(int i = 0; i < diff; i++){
+            insertDigitAtEnd(n1, 0);
+            n1->decimal_pos ++;
+        }
+    }
+
+    if(n1->sign == true && n2->sign == true){
         return add_mag(n1,n2);
     }
-    else if(n1.sign == true && n2.sign == false){
-        if(n1.size > n2.size){
+    else if(n1->sign == true && n2->sign == false){
+        if(n1->size > n2->size){
             return sub_mag(n1, n2);
         }
-        else if(n1.size < n2.size){
-            number n3 = sub_mag(n2, n1);
-            n3.sign = false;
+        else if(n1->size < n2->size){
+            number* n3 = sub_mag(n2, n1);
+            n3->sign = false;
             return n3;
         }
         else{
             if(numberComparison(n1,n2) == 0)
-                return init_number(0);
+                return init_number_ptr(0);
             else if(numberComparison(n1,n2) == 1)
                 return sub_mag(n1,n2);
             else /*if(numberComparison(n1,n2) == 2)*/{
-                number n3 = sub_mag(n2,n1);
-                n3.sign = false;
+                number* n3 = sub_mag(n2,n1);
+                n3->sign = false;
                 return n3;
             }
         }
     }
 
-    else if(n1.sign == false && n2.sign == true){
-        if(n2.size > n1.size){
+    else if(n1->sign == false && n2->sign == true){
+        if(n2->size > n1->size){
             return sub_mag(n2, n1);
         }
-        else if(n2.size < n1.size){
-            number n3 = sub_mag(n1, n2);
-            n3.sign = false;
+        else if(n2->size < n1->size){
+            number* n3 = sub_mag(n1, n2);
+            n3->sign = false;
             return n3;
         }
         else{
             if(numberComparison(n1,n2) == 0)
-                return init_number(0);
+                return init_number_ptr(0);
             else if(numberComparison(n2,n1) == 1)
                 return sub_mag(n2,n1);
             else /*if(numberComparison(n2,n1) == 2)*/{
-                number n3 = sub_mag(n1,n2);
-                n3.sign = false;
+                number* n3 = sub_mag(n1,n2);
+                n3->sign = false;
                 return n3;
             }
         }
     }
 
     else{
-        number n3 = add_mag(n1,n2);
-        n3.sign = false;
+        number* n3 = add_mag(n1,n2);
+        n3->sign = false;
         return n3;
     }
 }
 
-number sub(number n1, number n2){
-    if(n1.sign == true && n2.sign == false){
+number* sub(number* n1, number* n2){
+
+    if(n1->decimal_pos > n2->decimal_pos){
+        int diff = n1->decimal_pos - n2->decimal_pos;
+        for(int i = 0; i < diff; i++){
+            insertDigitAtEnd(n2, 0);
+            n2->decimal_pos ++;
+        }
+    }
+
+    else if(n1->decimal_pos < n2->decimal_pos){
+        int diff = n2->decimal_pos - n1->decimal_pos;
+        for(int i = 0; i < diff; i++){
+            insertDigitAtEnd(n1, 0);
+            n1->decimal_pos ++;
+        }
+    }
+
+    if(n1->sign == true && n2->sign == false){
         return add_mag(n1,n2);
     }
-    else if(n1.sign == true && n2.sign == true){
-        if(n1.size > n2.size){
+    else if(n1->sign == true && n2->sign == true){
+        if(n1->size > n2->size){
             return sub_mag(n1, n2);
         }
-        else if(n1.size < n2.size){
-            number n3 = sub_mag(n2, n1);
-            n3.sign = false;
+        else if(n1->size < n2->size){
+            number* n3 = sub_mag(n2, n1);
+            n3->sign = false;
             return n3;
         }
         else{
             if(numberComparison(n1,n2) == 0)
-                return init_number(0);
+                return init_number_ptr(0);
             else if(numberComparison(n1,n2) == 1)
                 return sub_mag(n1,n2);
             else /*if(numberComparison(n1,n2) == 2)*/{
-                number n3 = sub_mag(n2,n1);
-                n3.sign = false;
+                number* n3 = sub_mag(n2,n1);
+                n3->sign = false;
                 return n3;
             }
         }
     }
 
-    else if(n1.sign == false && n2.sign == false){
-        if(n2.size > n1.size){
+    else if(n1->sign == false && n2->sign == false){
+        if(n2->size > n1->size){
             return sub_mag(n2, n1);
         }
-        else if(n2.size < n1.size){
-            number n3 = sub_mag(n1, n2);
-            n3.sign = false;
+        else if(n2->size < n1->size){
+            number* n3 = sub_mag(n1, n2);
+            n3->sign = false;
             return n3;
         }
         else{
             if(numberComparison(n1,n2) == 0)
-                return init_number(0);
+                return init_number_ptr(0);
             else if(numberComparison(n2,n1) == 1)
                 return sub_mag(n2,n1);
             else /*if(numberComparison(n2,n1) == 2)*/{
-                number n3 = sub_mag(n1,n2);
-                n3.sign = false;
+                number* n3 = sub_mag(n1,n2);
+                n3->sign = false;
                 return n3;
             }
         }
     }
 
     else{
-        number n3 = add_mag(n1,n2);
-        n3.sign = false;
+        number* n3 = add_mag(n1,n2);
+        n3->sign = false;
         return n3;
     }
 }
 
 /* returns n1 - n2 */
-number sub_mag(number n1, number n2){
+number* sub_mag(number* n1, number* n2){
     char diff;
     char borrow = 0;
-    node* temp1 = n1.tail;
-    node* temp2 = n2.tail;
+    node* temp1 = n1->tail;
+    node* temp2 = n2->tail;
 
     diff = (temp1->data - temp2->data + 10);
     borrow = diff / 10;
     borrow = borrow ^ 1;
     diff = diff % 10;
 //    printf("%d - %d - %d = %d\n",temp1->data, temp2->data, borrow, diff);
-    number n3 = init_number(diff);
+    number* n3 = init_number_ptr(diff);
     temp1 = temp1->prev;
     temp2 = temp2->prev;
     
@@ -317,7 +358,7 @@ number sub_mag(number n1, number n2){
             diff = temp1->data - borrow ; 
             borrow = 0;
  //           printf("%d - %d - %d = %d\n",temp1->data, temp2->data, borrow, diff);
-            insertDigitAtHead(&n3,diff);
+            insertDigitAtHead(n3,diff);
             temp1 = temp1->prev;
         }
         else if(temp1 != NULL && temp2 != NULL){
@@ -326,32 +367,51 @@ number sub_mag(number n1, number n2){
             diff = diff % 10;
             borrow = borrow ^ 1;
 //            printf("%d - %d - %d = %d\n",temp1->data, temp2->data, borrow, diff);
-            insertDigitAtHead(&n3, diff);
+            insertDigitAtHead(n3, diff);
             temp1 = temp1->prev;
             temp2 = temp2->prev;
         }
     }
+    n3->decimal_pos = n1->decimal_pos;
     return n3;
 }
 
-char numberComparison(number n1, number n2){
+char numberComparison(number* n1, number* n2){
+    printf("decimal pos of n1: %d\n", n1->decimal_pos);
+    printf("decimal pos of n2: %d\n", n2->decimal_pos);
     /* 
      *  return 1 if n1 is greater than n2
      *  return 2 if n1 is smaller than n2
      *  return 0 if n1 is equal to n2
      */
-    if(n1.size > n2.size){
+//    if(n1->decimal_pos > n2->decimal_pos){
+//        int diff = n1->decimal_pos - n2->decimal_pos;
+//        for(int i = 0; i < diff; i++){
+//            insertDigitAtEnd(n2, 0);
+//            n2->decimal_pos ++;
+//        }
+//    }
+//
+//    if(n1->decimal_pos < n2->decimal_pos){
+//        int diff = n2->decimal_pos - n1->decimal_pos;
+//        for(int i = 0; i < diff; i++){
+//            insertDigitAtEnd(n1, 0);
+//            n1->decimal_pos ++;
+//        }
+//    }
+
+    if(n1->size > n2->size){
         return 1;
     } 
 
-    else if(n1.size < n2.size){
+    else if(n1->size < n2->size){
         return 2;
     }
 
-    else if(n1.size == n2.size){
+    else if(n1->size == n2->size){
 
-        node* temp1 = (n1.head); 
-        node* temp2 = (n2.head); 
+        node* temp1 = (n1->head); 
+        node* temp2 = (n2->head); 
         while(temp1 != NULL){
             if(temp1->data > temp2->data){
                  return 1;

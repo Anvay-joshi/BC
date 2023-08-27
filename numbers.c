@@ -45,12 +45,52 @@ void insertDigitAtHead(number* n, char digit){
 //    printf("\n");
 //}
 
-void displayNumber(number n){
-    if(n.sign == 0)
+//void displayNumber(number n){
+//    if(n.sign == 0)
+//        printf("-");
+//    node* temp = n.head;
+//    int diff = n.decimal_pos - n.size;
+//    if(n.decimal_pos >= n.size){
+//        printf("0");
+//        printf(".");
+//        for(int i = 0; i < diff; i++){
+//            printf("0");
+//        }
+//        while(temp != NULL){
+//            printf("%d",temp->data);
+//            temp = temp->next;
+//        }
+//        printf("\n");
+//        return;
+//    }
+//    else if(n.decimal_pos < n.size){
+//        diff *= -1; 
+//        for(int i = 0; i < diff; i++){
+//            printf("%d",temp->data);
+//            temp = temp->next;
+//        }         
+//        printf(".");
+//        while(temp != NULL){
+//            printf("%d",temp->data);
+//            temp = temp->next;
+//        }
+//    }
+//    printf("\n");
+//}
+
+void displayNumber(number* n){
+    printf("decimal pos of n: %d\n", n->decimal_pos);
+    if(n->decimal_pos > 10){
+        printf("jasta 0 zalet\n");
+        return;
+    }
+    if(n->sign == 0)
         printf("-");
-    node* temp = n.head;
-    int diff = n.decimal_pos - n.size;
-    if(n.decimal_pos >= n.size){
+    node* temp = n->head;
+    int diff = n->decimal_pos - n->size;
+    printf("diff is: %d\n", diff);
+    //if(n->decimal_pos >= n->size){
+    if(diff > 0){
         printf("0");
         printf(".");
         for(int i = 0; i < diff; i++){
@@ -63,11 +103,15 @@ void displayNumber(number n){
         printf("\n");
         return;
     }
-    else if(n.decimal_pos < n.size){
+    //else if(n->decimal_pos < n->size){
+    else if(diff <= 0){
+        printf("regular madhe alo\n");
         diff *= -1; 
         for(int i = 0; i < diff; i++){
-            printf("%d",temp->data);
-            temp = temp->next;
+            //while(temp != NULL){
+                printf("%d",temp->data);
+                temp = temp->next;
+            
         }         
         printf(".");
         while(temp != NULL){
@@ -75,8 +119,10 @@ void displayNumber(number n){
             temp = temp->next;
         }
     }
+    
     printf("\n");
 }
+
 
 //void displayNumber(number n){
 //    if(n.sign == 0)
